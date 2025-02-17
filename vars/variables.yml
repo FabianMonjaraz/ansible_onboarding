@@ -1,0 +1,26 @@
+---
+var_string: "Hola Mundo"
+var_numero: 10
+var_boolean_may: True
+var_boolean_min: true
+var_boolean_palabra: no
+
+var_lista_1: [1, 2, 3]
+
+var_lista_2:
+  - "1"
+  - "2"
+  - "3"
+
+var_diccionario:
+  llave1: valor1
+  llave2: valor2
+  llave3: valor3
+
+lista_diccionarios:
+  - tipo: mamifero
+    patas: 2
+    nombre: canguro
+  - tipo: reptil
+    patas: 4
+    nombre: cocodrilo

@@ -1,0 +1,84 @@
+---
+- name: Primer paso
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+    - vars/variables.yml
+  vars:
+    var_1: Ivan
+    archivos_a_enviar:
+      - .vimrc
+      - .bash_history
+      - .tmux.conf
+
+  tasks:
+    # - name: Imprimir mensaje texto
+    #   ansible.builtin.debug:
+    #     msg: "Hola {{ Var_1 }} - {{ ansible_hostname }}"
+
+    - name: Buscar archivos locales
+      ansible.builtin.find:
+        path: "{{ playbook_dir }}/files"
+        hidden: true
+      delegate_to: localhost
+      connection: local
+      run_once: true
+      register: archivos_a_enviar
+      tags:
+        - buscar_archivos
+
+    - name: Mostrar archivos
+      ansible.builtin.debug:
+        msg: "{{ archivos_a_enviar }}"
+      tags:
+        - buscar_archivos
+
+    - name: Copy config files
+      ansible.builtin.copy:
+        src: "{{ item.path }}"
+        dest: /home/dm0n/
+      loop: "{{ archivos_a_enviar.files }}"
+
+    - name: Mostrar variables
+      ansible.builtin.debug:
+        msg: "{{ var_string }}"
+      tags:
+        - variables
+
+    - name: Mostrar variables
+      ansible.builtin.debug:
+        msg: "{{ var_boolean_may }}"
+      tags:
+        - variables
+
+    - name: Mostrar variables
+      ansible.builtin.debug:
+        msg: "{{ var_lista_1[1] }}"
+      tags:
+        - variables
+
+    - name: Mostrar variables
+      ansible.builtin.debug:
+        msg: "{{ item }}"
+      loop: "{{ var_lista_1 }}"
+      tags:
+        - variables
+
+    - name: Mostrar variables
+      ansible.builtin.debug:
+        msg: "{{ var_diccionario['llave2'] }}"
+      tags:
+        - variables
+
+    - name: Mostrar variables
+      ansible.builtin.debug:
+        msg: "{{ var_diccionario.llave3 }}"
+      tags:
+        - variables
+
+    - name: Mostrar variables
+      ansible.builtin.debug:
+        msg: "{{ lista_diccionarios[0].nombre }}"
+      tags:
+        - variables
