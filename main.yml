@@ -86,15 +86,32 @@
     - name: Lectura de archivo bash history
       ansible.builtin.slurp:
         src: "{{ playbook_dir }}/files/.bash_history"
-      register: mounts
+      register: contenido_archivo
       delegate_to: localhost
       connection: local
       run_once: true
       tags: 
         - slurp
+
+    - name: Ejecutar comando
+      ansible.builtin.shell:
+        cmd: "id"
+      tags: 
+        - slurp
         
     - name: Print returned information
       ansible.builtin.debug:
-        msg: "{{ mounts['content'] | b64decode }}"
+        msg: "{{ contenido_archivo }}"
       tags: 
         - slurp
+
+    - name: Print returned information
+      ansible.builtin.debug:
+        msg: "{{ contenido_archivo['content'] | b64decode }}"
+
+    - name: Imprimir tarea
+      ansible.builtin.debug:
+        msg: "Imprime mensaje"
+      # tags: 
+      #   - slurp
+      when: (contenido_archivo.stdout.find('tmux') != -1)
