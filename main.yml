@@ -108,5 +108,8 @@
         msg: "Imprime mensaje"
       tags: 
         - slurp
-      when: (contenido_archivo.content | b64decode).find("tmux") != -1
+      when: 
+        - 'not "steam" in (contenido_archivo.content | b64decode)'
+        - '"tmux" in (contenido_archivo.content | b64decode)'
+      # when: (contenido_archivo.content | b64decode).find("steam") == -1
     
