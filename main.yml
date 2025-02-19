@@ -101,19 +101,12 @@
 
     - name: Print returned information
       ansible.builtin.debug:
-        # msg: "{{ contenido_archivo.content | b64decode }}"
         msg: "{{ contenido_archivo['content'] | b64decode }}"
 
-    # - name: Imprimir tarea
-    #   ansible.builtin.debug:
-    #     msg: "Imprime mensaje"
-    #   # tags: 
-    #   #   - slurp
-    #   when: (contenido_archivo.content | b64decode).find("tmux")
-    #   # when: (contenido_archivo.stdout.find('tmux') != -1)
-
-    - name: Mostrar variables
+    - name: Imprimir tarea
       ansible.builtin.debug:
-        msg: "{{  (contenido_archivo.content | b64decode).find('tmux') }}"
-      tags:
+        msg: "Imprime mensaje"
+      tags: 
         - slurp
+      when: (contenido_archivo.content | b64decode).find("tmux") != -1
+    
