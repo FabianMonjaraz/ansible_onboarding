@@ -94,23 +94,40 @@
         - slurp
 
     - name: nombre del bloque
-      when: '"tmux" in (contenido_archivo.content | b64decode)'
+      when: '"steam" in (contenido_archivo.content | b64decode)'
       block:
 
-      - name: Print returned information
+      - name: Leer registro
         ansible.builtin.debug:
           var: "contenido_archivo"
         tags: 
           - slurp
   
-      - name: Print returned information
+      - name: Leer contenido del registro descifrado
         ansible.builtin.debug:
           msg: "{{ contenido_archivo['content'] | b64decode }}"
+        tags: 
+          - slurp
   
-      - name: Imprimir tarea
+      - name: Imprimir mensaje adicional
         ansible.builtin.debug:
           msg: "Imprime mensaje"
         tags: 
           - slurp
         when: 'not "steam" in (contenido_archivo.content | b64decode)'
     
+    - name: REscue block
+      rescue:
+      - name: Tarea rescue
+        ansible.builtin.debug:
+          msg: Tarea rescatadora
+        tags: 
+          - slurp
+
+    - name: Always block
+      always:
+      - name: Tarea rescue
+        ansible.builtin.debug:
+          msg: Tarea que siempre se ejecuta
+        tags: 
+          - slurp
