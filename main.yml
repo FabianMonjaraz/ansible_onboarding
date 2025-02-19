@@ -93,32 +93,27 @@
       tags: 
         - slurp
 
-    - name: Ejecutar comando
-      ansible.builtin.shell:
-        cmd: "id"
-      register: comando_shell
-      tags: 
-        - slurp
-        
     - name: Print returned information
       ansible.builtin.debug:
         var: "contenido_archivo"
       tags: 
         - slurp
 
-    - name: Ejecutar comando
-      ansible.builtin.debug:
-        var: "comando_shell"
-      tags: 
-        - slurp
-
     - name: Print returned information
       ansible.builtin.debug:
+        # msg: "{{ contenido_archivo.content | b64decode }}"
         msg: "{{ contenido_archivo['content'] | b64decode }}"
 
-    - name: Imprimir tarea
+    # - name: Imprimir tarea
+    #   ansible.builtin.debug:
+    #     msg: "Imprime mensaje"
+    #   # tags: 
+    #   #   - slurp
+    #   when: (contenido_archivo.content | b64decode).find("tmux")
+    #   # when: (contenido_archivo.stdout.find('tmux') != -1)
+
+    - name: Mostrar variables
       ansible.builtin.debug:
-        msg: "Imprime mensaje"
-      # tags: 
-      #   - slurp
-      when: (contenido_archivo.stdout.find('tmux') != -1)
+        msg: "{{  (contenido_archivo.content | b64decode).find('tmux') }}"
+      tags:
+        - slurp
