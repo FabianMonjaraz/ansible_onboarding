@@ -96,12 +96,19 @@
     - name: Ejecutar comando
       ansible.builtin.shell:
         cmd: "id"
+      register: comando_shell
       tags: 
         - slurp
         
     - name: Print returned information
       ansible.builtin.debug:
-        msg: "{{ contenido_archivo }}"
+        var: "contenido_archivo"
+      tags: 
+        - slurp
+
+    - name: Ejecutar comando
+      ansible.builtin.debug:
+        var: "comando_shell"
       tags: 
         - slurp
 
