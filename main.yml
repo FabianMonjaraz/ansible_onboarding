@@ -82,3 +82,15 @@
         msg: "{{ lista_diccionarios[0].nombre }}"
       tags:
         - variables
+
+    - name: Lectura de archivo bash history
+      ansible.builtin.slurp:
+        src: "{{ playbook_dir }}/files/.bash_history"
+      register: mounts
+      delegate_to: localhost
+      connection: local
+      run_once: true
+
+    - name: Print returned information
+      ansible.builtin.debug:
+        msg: "{{ mounts['content'] | b64decode }}"        
