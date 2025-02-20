@@ -1,0 +1,17 @@
+---
+# Cabecera
+## Play ejecutado en localhost 
+## Tareas ejecutadas localmente
+## No recolectar la informacion por default
+
+# Tareas
+## Crear un archivo en /tmp/
+### El nombre del archivo debe ser el numero de empleado
+### El archivo debe tener permisos '0644'
+### El nombre del archivo creado debe provenir de una variable
+#### Utilizar el modulo "file": https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html
+
+## Ingresa 2 datos al nuevo archivo creado
+### Nombre
+### Numero de empleado
+#### Utilizar el modulo "lineinfile": https://docs.ansible.com/ansible/latest/collections/ansible/builtin/lineinfile_module.html
