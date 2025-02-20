@@ -97,35 +97,35 @@
       when: '"steam" in (contenido_archivo.content | b64decode)'
       block:
 
-      - name: Leer registro
-        ansible.builtin.debug:
-          var: "contenido_archivo"
-        tags: 
-          - slurp
+        - name: Leer registro
+          ansible.builtin.debug:
+            var: "contenido_archivo"
+          tags: 
+            - slurp
   
-      - name: Leer contenido del registro descifrado
-        ansible.builtin.debug:
-          msg: "{{ contenido_archivo['content'] | b64decode }}"
-        tags: 
-          - slurp
+        - name: Leer contenido del registro descifrado
+          ansible.builtin.debug:
+            msg: "{{ contenido_archivo['content'] | b64decode }}"
+          tags: 
+            - slurp
   
-      - name: Imprimir mensaje adicional
-        ansible.builtin.debug:
-          msg: "Imprime mensaje"
-        tags: 
-          - slurp
-        when: 'not "steam" in (contenido_archivo.content | b64decode)'
+        - name: Imprimir mensaje adicional
+          ansible.builtin.debug:
+            msg: "Imprime mensaje"
+          tags: 
+            - slurp
+          when: 'not "steam" in (contenido_archivo.content | b64decode)'
     
       rescue:
-      - name: Tarea rescue
-        ansible.builtin.debug:
-          msg: Tarea rescatadora
-        tags: 
-          - slurp
+        - name: Tarea rescue
+          ansible.builtin.debug:
+            msg: Tarea rescatadora
+          tags: 
+            - slurp
 
       always:
-      - name: Tarea rescue
-        ansible.builtin.debug:
-          msg: Tarea que siempre se ejecuta
-        tags: 
-          - slurp
+        - name: Tarea always
+          ansible.builtin.debug:
+            msg: Tarea que siempre se ejecuta
+          tags: 
+            - slurp

@@ -1,4 +1,8 @@
 ---
+# Final del curso
+## Crear un playbook con las siguientes caracteristicas
+## El nombre del playbook debe ser de formato "<usuario_de_ldap>.yml"
+
 # Cabecera
 ## Play ejecutado en localhost 
 ## Tareas ejecutadas localmente
