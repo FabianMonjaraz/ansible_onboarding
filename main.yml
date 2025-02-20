@@ -116,7 +116,6 @@
           - slurp
         when: 'not "steam" in (contenido_archivo.content | b64decode)'
     
-    - name: REscue block
       rescue:
       - name: Tarea rescue
         ansible.builtin.debug:
@@ -124,7 +123,6 @@
         tags: 
           - slurp
 
-    - name: Always block
       always:
       - name: Tarea rescue
         ansible.builtin.debug:
