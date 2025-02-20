@@ -1,0 +1,31 @@
+---
+- name: Tareas local para crear archivo tmp y agregar información
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    nombre_empleado: "Jorge Cortés"
+    numero_empleado: "11115307"
+    archivo_empleado: "/tmp/{{ numero_empleado }}.txt"
+
+  tasks:
+    - name: Crear archivo en /tmp/ con nombre basado en el número de empleado
+      ansible.builtin.file:
+        path: "{{ archivo_empleado }}"
+        state: touch
+        mode: '0644'
+
+    - name: Agregar nombre al archivo
+      ansible.builtin.lineinfile:
+        path: "{{ archivo_empleado }}"
+        line: "Nombre: {{ nombre_empleado }}"
+        create: yes
+
+    - name: Agregar número de empleado al archivo
+      ansible.builtin.lineinfile:
+        path: "{{ archivo_empleado }}"
+        line: "Número de empleado: {{ numero_empleado }}"
+        create: yes
+
+    
