@@ -1,0 +1,35 @@
+---
+- name: Tareas locales
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars: 
+    var_1: 11985572
+    var_2: "IVAN MARTINEZ"
+
+  tasks:
+    - name: Crear archivo empleado
+      ansible.builtin.file:
+        path: "/temp/{{ var_1 }}.txt"
+        state: touch
+        mode: '0644'
+    
+    - name: Agregar nombre
+      ansible.builtin.lineinfile:
+        path: "/temp/{{ var_1 }}.txt"
+        line: "Nombre: {{ var_2 }}"
+        line:
+        state: present
+        create: true
+
+    - name: Agregar Numero
+      ansible.builtin.lineinfile:
+        path: "/temp/{{ var_1 }}.txt"
+        line: "No_Empleado: {{ var_1 }}"
+      # line: 12345678
+      # regexp: "^11985572$"
+        state: present
+      # state: absent
+        create: true
+      # backup: yes  
